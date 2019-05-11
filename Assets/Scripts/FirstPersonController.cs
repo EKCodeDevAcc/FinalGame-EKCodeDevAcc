@@ -47,6 +47,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public float currentTime = 0f;
         public float startingTime = 30f;
 
+        public Text countText;
+        public int currentCount = 0;
 
         // Use this for initialization
         private void Start()
@@ -82,6 +84,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if (other.gameObject.CompareTag("Car"))
             {
                 SceneManager.LoadScene("GameOverScene");
+            } else if (other.gameObject.CompareTag("Coin"))
+            {
+                other.gameObject.SetActive(false);
+                currentTime += 10;
+                currentCount += 1;
             }
         }
 
@@ -120,6 +127,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 SceneManager.LoadScene("GameOverScene");
             }
+
+            string currentCoin = currentCount.ToString();
+            countText.text = currentCoin + " / 9";
         }
 
         private void FixedUpdate()

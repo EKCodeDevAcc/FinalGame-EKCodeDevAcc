@@ -43,7 +43,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool m_Jumping;
         //private AudioSource m_AudioSource;
 
-        public Text youWonText;
+        public Text displayingText;
         private bool goalTrigger;
 
         // Use this for initialization
@@ -61,7 +61,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MouseLook.Init(transform, m_Camera.transform);
 
             goalTrigger = false;
-            //youWonText.text = "";
+            displayingText.text = "";
         }
 
         public void SetRotation(Transform other)
@@ -77,23 +77,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // collide goal
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Goal"))
+            if (other.gameObject.CompareTag("Car"))
             {
-                other.gameObject.SetActive(false);
                 goalTrigger = true;
-                SetYouWonText();
+                SetGameOverText();
             }
         }
 
-        // set text when a player at the goal
-        private void SetYouWonText()
+        private void SetGameOverText()
         {
             if (goalTrigger == true)
             {
-                youWonText.text = "You Won!";
+                displayingText.text = "Game Over";
             }
         }
-
 
         // Update is called once per frame
         private void Update()

@@ -44,7 +44,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private bool goalTrigger;
 
         public Text timerText;
-        public float currentTime = 0f;
+        public static float currentTime = 0f;
         public float startingTime = 30f;
 
         public Text countText;
@@ -96,6 +96,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 other.gameObject.SetActive(false);
                 currentTime += 10;
                 currentCount += 1;
+                
+                if (currentCount == 9)
+                {
+                    SceneManager.LoadScene("WinScene");
+                }
             }
         }
 
@@ -113,9 +118,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
             //timer
             currentTime -= 1 * Time.deltaTime;
 
-            string minutes = ((int)currentTime / 60).ToString();
-            string seconds = (currentTime % 60).ToString("f2");
-            timerText.text = minutes + ":" + seconds; ;
+            string minutes = ((int)currentTime / 60).ToString("00.##");
+            string seconds = (currentTime % 60).ToString("00");
+            timerText.text = minutes + ":" + seconds;
 
             if (currentTime <= 0)
             {

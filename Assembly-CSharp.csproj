@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\Rotator.cs" />
     <Compile Include="Assets\Scripts\TitleOnInput.cs" />
     <Compile Include="Assets\Scripts\Wheels.cs" />
+    <Compile Include="Assets\Scripts\WinTime.cs" />
     <Compile Include="Assets\Zero Rare\Retro Sound Effects\Demo\Demo.cs" />
     <None Include="Assets\ProCore\ProBuilder\Shader\pb_TransparentOverlay.shader" />
     <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />

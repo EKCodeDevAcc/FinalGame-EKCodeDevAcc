@@ -50,6 +50,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public Text countText;
         public int currentCount = 0;
 
+        public AudioSource my_AudioSource;
+
+        [SerializeField] private AudioClip m_CoinSound;
+
         // Use this for initialization
         private void Start()
         {
@@ -66,6 +70,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             goalTrigger = false;
 
             currentTime = startingTime;
+
+            my_AudioSource = GetComponent<AudioSource>();
         }
 
         public void SetRotation(Transform other)
@@ -83,13 +89,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
         {
             if (other.gameObject.CompareTag("Car"))
             {
-                SceneManager.LoadScene("GameOverScene");
+                SceneManager.LoadScene("CarCrashGameOverScene");
             } else if (other.gameObject.CompareTag("Coin"))
             {
+                PlayCoinSound();
                 other.gameObject.SetActive(false);
                 currentTime += 10;
                 currentCount += 1;
             }
+        }
+
+        private void PlayCoinSound()
+        {
+            my_AudioSource.clip = m_CoinSound;
+            my_AudioSource.Play();
         }
 
         // Update is called once per frame
@@ -106,7 +119,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             if (currentTime <= 0)
             {
-                SceneManager.LoadScene("GameOverScene");
+                SceneManager.LoadScene("TimeOutGameOverScene");
             }
 
             string currentCoin = currentCount.ToString();
